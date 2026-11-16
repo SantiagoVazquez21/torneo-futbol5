@@ -1,4 +1,4 @@
-namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
+namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
 {
     partial class FormListado
     {

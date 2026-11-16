@@ -1,3 +1,6 @@
+using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU;
+using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia;
+
 namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
 {
     internal static class Program

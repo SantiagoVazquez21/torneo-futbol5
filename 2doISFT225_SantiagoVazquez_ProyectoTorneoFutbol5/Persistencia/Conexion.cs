@@ -1,4 +1,4 @@
-namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
+namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
 {
     // La cadena de conexión se lee de conexion.local.txt y no está escrita acá:
     // tiene la contraseña de la base en la nube y el repo es público.

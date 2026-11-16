@@ -1,4 +1,4 @@
-namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
+namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
 {
     // Pantalla de inicio. Cada formulario se abre con ShowDialog: mientras está
     // abierto, el de atrás queda bloqueado y no se pueden abrir dos a la vez.

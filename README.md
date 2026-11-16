@@ -23,6 +23,19 @@ La categoría se asigna automáticamente según la edad y el sexo del participan
 2. En phpMyAdmin: **Importar** → `BaseDeDatos/torneo_futbol5.sql` (crea la base con sus tablas y datos de ejemplo).
 3. En `conexion.local.txt` usar la línea de XAMPP en lugar de la de TiDB.
 
+## Estructura (modelo de 3 capas)
+
+```
+IGU/            Formularios: leen los datos y muestran mensajes
+  FormPrincipal, FormJugador (alta y modificación), FormListado
+Logica/         Reglas del torneo y modelo
+  Controladora, Participante, Categoria, Inscripcion, ValidacionException
+Persistencia/   Acceso a la base de datos
+  ControladoraPersistencia, InscripcionRepositorio, CategoriaRepositorio, Conexion, PersistenciaException
+```
+
+Cada capa solo habla con la siguiente: **IGU → Controladora → ControladoraPersistencia → Repositorios → BD**.
+
 ## Base de datos
 
 | Tabla | Contenido |

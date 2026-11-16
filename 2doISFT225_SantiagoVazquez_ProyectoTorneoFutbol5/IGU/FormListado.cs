@@ -1,10 +1,11 @@
-using MySql.Data.MySqlClient;
+using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Logica;
+using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia;
 
-namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
+namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
 {
     public partial class FormListado : Form
     {
-        private readonly InscripcionRepositorio inscripcionRepositorio = new InscripcionRepositorio();
+        private readonly Controladora controladora = new Controladora();
 
         public FormListado()
         {
@@ -23,13 +24,11 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
 
             try
             {
-                inscripciones = inscripcionRepositorio.ObtenerTodas();
+                inscripciones = controladora.TraerInscripciones();
             }
-            catch (MySqlException ex)
+            catch (PersistenciaException ex)
             {
-                MessageBox.Show(
-                    $"No se pudo conectar a la base de datos.\n\n{ex.Message}\n\n" +
-                    "Verificá la conexión a internet y el archivo conexion.local.txt.");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -108,11 +107,11 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
 
             try
             {
-                inscripcionRepositorio.Eliminar(seleccionada);
+                controladora.EliminarJugador(seleccionada);
             }
-            catch (MySqlException ex)
+            catch (PersistenciaException ex)
             {
-                MessageBox.Show($"No se pudo eliminar en la base de datos.\n\n{ex.Message}");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

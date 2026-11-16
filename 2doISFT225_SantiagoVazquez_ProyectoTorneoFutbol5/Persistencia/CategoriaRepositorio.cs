@@ -1,6 +1,7 @@
 using MySql.Data.MySqlClient;
+using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Logica;
 
-namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
+namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
 {
     public class CategoriaRepositorio
     {
