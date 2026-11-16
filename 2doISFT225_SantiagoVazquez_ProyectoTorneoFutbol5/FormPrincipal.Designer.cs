@@ -36,19 +36,20 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
             //
             // lblTitulo
             //
-            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblTitulo.Location = new Point(12, 20);
+            lblTitulo.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+            lblTitulo.Location = new Point(12, 30);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(296, 30);
+            lblTitulo.Size = new Size(496, 50);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Torneo Fútbol 5";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             //
             // btnAgregarJugador
             //
-            btnAgregarJugador.Location = new Point(70, 70);
+            btnAgregarJugador.Font = new Font("Segoe UI", 12F);
+            btnAgregarJugador.Location = new Point(110, 115);
             btnAgregarJugador.Name = "btnAgregarJugador";
-            btnAgregarJugador.Size = new Size(180, 36);
+            btnAgregarJugador.Size = new Size(300, 60);
             btnAgregarJugador.TabIndex = 1;
             btnAgregarJugador.Text = "Agregar jugador";
             btnAgregarJugador.UseVisualStyleBackColor = true;
@@ -56,9 +57,10 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
             //
             // btnModificarJugador
             //
-            btnModificarJugador.Location = new Point(70, 116);
+            btnModificarJugador.Font = new Font("Segoe UI", 12F);
+            btnModificarJugador.Location = new Point(110, 195);
             btnModificarJugador.Name = "btnModificarJugador";
-            btnModificarJugador.Size = new Size(180, 36);
+            btnModificarJugador.Size = new Size(300, 60);
             btnModificarJugador.TabIndex = 2;
             btnModificarJugador.Text = "Modificar jugador";
             btnModificarJugador.UseVisualStyleBackColor = true;
@@ -66,9 +68,10 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
             //
             // btnSalir
             //
-            btnSalir.Location = new Point(70, 162);
+            btnSalir.Font = new Font("Segoe UI", 12F);
+            btnSalir.Location = new Point(110, 275);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(180, 36);
+            btnSalir.Size = new Size(300, 60);
             btnSalir.TabIndex = 3;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
@@ -78,7 +81,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
             //
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(320, 225);
+            ClientSize = new Size(520, 400);
             Controls.Add(btnSalir);
             Controls.Add(btnModificarJugador);
             Controls.Add(btnAgregarJugador);
