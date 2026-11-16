@@ -26,6 +26,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
             inscripcionAModificar = inscripcion;
 
             Text = "Modificar jugador";
+            lblTitulo.Text = "Modificar jugador";
             CargarCampos(inscripcion);
         }
 
