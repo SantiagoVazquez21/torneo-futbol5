@@ -36,9 +36,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             btnGuardar = new Button();
             btnCancelar = new Button();
             SuspendLayout();
-            //
+            // 
             // lblTitulo
-            //
+            // 
             lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblTitulo.Location = new Point(12, 12);
             lblTitulo.Name = "lblTitulo";
@@ -46,46 +46,46 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Crear equipo";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblNombre
-            //
+            // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 11F);
             lblNombre.Location = new Point(12, 68);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(144, 20);
+            lblNombre.Size = new Size(143, 20);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre del equipo:";
-            //
+            // 
             // txtNombre
-            //
+            // 
             txtNombre.Font = new Font("Segoe UI", 11F);
             txtNombre.Location = new Point(170, 65);
             txtNombre.MaxLength = 50;
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(320, 27);
             txtNombre.TabIndex = 2;
-            //
+            // 
             // lblCapitan
-            //
+            // 
             lblCapitan.AutoSize = true;
             lblCapitan.Font = new Font("Segoe UI", 11F);
             lblCapitan.Location = new Point(12, 108);
             lblCapitan.Name = "lblCapitan";
-            lblCapitan.Size = new Size(361, 20);
+            lblCapitan.Size = new Size(372, 20);
             lblCapitan.TabIndex = 3;
             lblCapitan.Text = "Elegí al capitán (solo jugadores que no tienen equipo):";
-            //
+            // 
             // grillaJugadores
-            //
+            // 
             grillaJugadores.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grillaJugadores.Location = new Point(12, 136);
             grillaJugadores.Name = "grillaJugadores";
             grillaJugadores.Size = new Size(1010, 316);
             grillaJugadores.TabIndex = 4;
-            //
+            // 
             // btnGuardar
-            //
+            // 
             btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnGuardar.Font = new Font("Segoe UI", 11F);
             btnGuardar.Location = new Point(716, 464);
@@ -95,9 +95,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
-            //
+            // 
             // btnCancelar
-            //
+            // 
             btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.Font = new Font("Segoe UI", 11F);
@@ -107,9 +107,10 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             btnCancelar.TabIndex = 6;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            //
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // FormEquipo
-            //
+            // 
             AcceptButton = btnGuardar;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
