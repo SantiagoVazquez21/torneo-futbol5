@@ -82,6 +82,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(320, 27);
             txtApellido.TabIndex = 2;
+            txtApellido.KeyPress += SoloLetras_KeyPress;
             // 
             // lblNombre
             // 
@@ -101,6 +102,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(320, 27);
             txtNombre.TabIndex = 4;
+            txtNombre.KeyPress += SoloLetras_KeyPress;
             // 
             // lblDni
             // 
@@ -120,6 +122,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(320, 27);
             txtDni.TabIndex = 6;
+            txtDni.KeyPress += SoloNumeros_KeyPress;
             // 
             // lblDireccion
             // 
@@ -158,6 +161,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(80, 27);
             txtEdad.TabIndex = 10;
+            txtEdad.KeyPress += SoloNumeros_KeyPress;
             txtEdad.TextChanged += ActualizarCategoriaAsignada;
             // 
             // lblTelefono
@@ -178,6 +182,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(320, 27);
             txtTelefono.TabIndex = 12;
+            txtTelefono.KeyPress += Telefono_KeyPress;
             // 
             // lblSexo
             // 

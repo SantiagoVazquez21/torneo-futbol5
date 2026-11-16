@@ -174,6 +174,38 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             return cmbEquipo.SelectedItem as Equipo;
         }
 
+        // Filtros de teclado: e.Handled = true descarta el carácter. Las teclas de
+        // control (Backspace, Ctrl+C, Ctrl+V) siempre pasan. Lo pegado no pasa por
+        // acá, por eso la Controladora sigue validando al guardar.
+
+        // Apellido y nombre. char.IsLetter acepta tildes y ñ.
+        private void SoloLetras_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        // DNI y edad.
+        private void SoloNumeros_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Números, espacios, guion y +, por ejemplo: +54 11 1234-5678.
+        private void Telefono_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ' ' &&
+                e.KeyChar != '-' && e.KeyChar != '+')
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
