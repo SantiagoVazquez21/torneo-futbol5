@@ -9,6 +9,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
     {
         private readonly InscripcionRepositorio inscripcionRepositorio = new InscripcionRepositorio();
         private readonly CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio();
+        private readonly EquipoRepositorio equipoRepositorio = new EquipoRepositorio();
 
         public List<Categoria> TraerCategorias()
         {
@@ -38,6 +39,26 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
         public bool ExisteDni(string dni, int idParticipanteExcluido)
         {
             return Ejecutar(() => inscripcionRepositorio.ExisteDni(dni, idParticipanteExcluido));
+        }
+
+        public List<Equipo> TraerEquipos()
+        {
+            return Ejecutar(() => equipoRepositorio.ObtenerTodos());
+        }
+
+        public void CrearEquipo(Equipo equipo, Inscripcion capitan)
+        {
+            Ejecutar(() => equipoRepositorio.Insertar(equipo, capitan));
+        }
+
+        public bool ExisteNombreEquipo(string nombre)
+        {
+            return Ejecutar(() => equipoRepositorio.ExisteNombre(nombre));
+        }
+
+        public int ContarJugadoresEquipo(int idEquipo)
+        {
+            return Ejecutar(() => equipoRepositorio.ContarJugadores(idEquipo));
         }
 
         // Corre la operación y, si MySQL falla, la convierte en PersistenciaException.

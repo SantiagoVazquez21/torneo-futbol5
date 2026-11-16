@@ -51,6 +51,23 @@ INSERT INTO `categorias` VALUES (1,'Femenino A',18,30,'F'),(2,'Femenino B',31,45
 UNLOCK TABLES;
 
 --
+-- Table structure for table `equipos`
+--
+
+DROP TABLE IF EXISTS `equipos`;
+CREATE TABLE `equipos` (
+  `id_equipo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_equipo` varchar(50) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `id_capitan` int(11) NOT NULL,
+  PRIMARY KEY (`id_equipo`),
+  UNIQUE KEY `uq_equipo_nombre` (`nombre_equipo`),
+  UNIQUE KEY `uq_equipo_capitan` (`id_capitan`),
+  CONSTRAINT `fk_equipo_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
+  CONSTRAINT `fk_equipo_capitan` FOREIGN KEY (`id_capitan`) REFERENCES `participantes` (`id_participante`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Table structure for table `inscripciones`
 --
 
@@ -63,11 +80,14 @@ CREATE TABLE `inscripciones` (
   `abono_inscrip` tinyint(1) DEFAULT 0,
   `categoria` int(11) NOT NULL,
   `participante` int(11) NOT NULL,
+  `id_equipo` int(11) DEFAULT NULL,
   PRIMARY KEY (`num_inscripcion`),
   KEY `categoria` (`categoria`),
   KEY `participante` (`participante`),
+  KEY `id_equipo` (`id_equipo`),
   CONSTRAINT `inscripciones_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`),
-  CONSTRAINT `inscripciones_ibfk_2` FOREIGN KEY (`participante`) REFERENCES `participantes` (`id_participante`)
+  CONSTRAINT `inscripciones_ibfk_2` FOREIGN KEY (`participante`) REFERENCES `participantes` (`id_participante`),
+  CONSTRAINT `fk_inscripcion_equipo` FOREIGN KEY (`id_equipo`) REFERENCES `equipos` (`id_equipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,7 +97,7 @@ CREATE TABLE `inscripciones` (
 
 LOCK TABLES `inscripciones` WRITE;
 /*!40000 ALTER TABLE `inscripciones` DISABLE KEYS */;
-INSERT INTO `inscripciones` VALUES (1,'2026-09-20',1,4,1),(2,'2026-09-20',1,6,2),(3,'2026-09-20',1,5,3),(4,'2026-09-20',0,5,4),(5,'2026-09-21',1,4,5),(6,'2026-09-21',0,4,6),(7,'2026-09-21',1,6,7),(8,'2026-09-21',1,4,8),(9,'2026-09-21',1,2,9),(10,'2026-09-21',0,1,10),(11,'2026-09-21',1,1,11),(12,'2026-09-21',1,3,12),(13,'2026-09-22',0,3,13),(14,'2026-09-22',0,5,14),(15,'2026-09-22',1,1,15);
+INSERT INTO `inscripciones` VALUES (1,'2026-09-20',1,4,1,NULL),(2,'2026-09-20',1,6,2,NULL),(3,'2026-09-20',1,5,3,NULL),(4,'2026-09-20',0,5,4,NULL),(5,'2026-09-21',1,4,5,NULL),(6,'2026-09-21',0,4,6,NULL),(7,'2026-09-21',1,6,7,NULL),(8,'2026-09-21',1,4,8,NULL),(9,'2026-09-21',1,2,9,NULL),(10,'2026-09-21',0,1,10,NULL),(11,'2026-09-21',1,1,11,NULL),(12,'2026-09-21',1,3,12,NULL),(13,'2026-09-22',0,3,13,NULL),(14,'2026-09-22',0,5,14,NULL),(15,'2026-09-22',1,1,15,NULL);
 /*!40000 ALTER TABLE `inscripciones` ENABLE KEYS */;
 UNLOCK TABLES;
 

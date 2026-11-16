@@ -14,57 +14,30 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             CargarInscripciones();
         }
 
-        // Se vuelve a leer todo de la base después de cada cambio: así la grilla
+        // Se vuelve a leer todo de la base después de cada cambio: así la tabla
         // muestra siempre lo que realmente quedó guardado.
         private void CargarInscripciones()
         {
-            dgvInscripciones.Rows.Clear();
-
-            List<Inscripcion> inscripciones;
-
             try
             {
-                inscripciones = controladora.TraerInscripciones();
+                grillaJugadores.Cargar(controladora.TraerInscripciones());
             }
             catch (PersistenciaException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-
-            foreach (Inscripcion inscripcion in inscripciones)
-            {
-                Participante p = inscripcion.Participante;
-
-                int fila = dgvInscripciones.Rows.Add(
-                    inscripcion.Numero,
-                    inscripcion.Fecha.ToString("dd/MM/yyyy"),
-                    p.Apellido,
-                    p.Nombre,
-                    p.Dni ?? "",
-                    p.Edad,
-                    p.Sexo.ToString(),
-                    p.Direccion,
-                    p.Telefono ?? "",
-                    inscripcion.Categoria.Nombre,
-                    inscripcion.Abono);
-
-                // Tag guarda el objeto completo para recuperarlo al elegir la fila.
-                dgvInscripciones.Rows[fila].Tag = inscripcion;
-            }
-
-            dgvInscripciones.ClearSelection();
         }
 
         private Inscripcion? InscripcionSeleccionada()
         {
-            if (dgvInscripciones.SelectedRows.Count == 0)
+            Inscripcion? seleccionada = grillaJugadores.Seleccionada;
+
+            if (seleccionada == null)
             {
                 MessageBox.Show("Seleccione una inscripción de la tabla.");
-                return null;
             }
 
-            return dgvInscripciones.SelectedRows[0].Tag as Inscripcion;
+            return seleccionada;
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -94,8 +67,16 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
                 return;
             }
 
+            string pregunta = $"¿Está seguro de eliminar a {seleccionada.Participante}?";
+
+            if (seleccionada.EsCapitan)
+            {
+                pregunta += $"\n\nEs capitán de {seleccionada.Equipo!.Nombre}: el equipo se va a disolver " +
+                            "y sus jugadores van a quedar sin equipo.";
+            }
+
             DialogResult respuesta = MessageBox.Show(
-                $"¿Está seguro de eliminar a {seleccionada.Participante}?",
+                pregunta,
                 "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -125,19 +106,14 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             Close();
         }
 
-        private void dgvInscripciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void grillaJugadores_JugadorDobleClic(object? sender, EventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                btnModificar_Click(sender, e);
-            }
+            btnModificar_Click(this, EventArgs.Empty);
         }
 
-        // Al mostrarse, la grilla marca sola la primera fila; se limpia para que
-        // no parezca seleccionada una inscripción que el usuario no eligió.
         private void FormListado_Shown(object sender, EventArgs e)
         {
-            dgvInscripciones.ClearSelection();
+            grillaJugadores.LimpiarSeleccion();
         }
     }
 }

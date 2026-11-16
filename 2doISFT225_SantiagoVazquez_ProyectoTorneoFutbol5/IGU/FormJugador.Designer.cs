@@ -46,6 +46,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             rdbFemenino = new RadioButton();
             lblCategoriaTitulo = new Label();
             lblCategoria = new Label();
+            lblEquipoTitulo = new Label();
+            cmbEquipo = new ComboBox();
+            lblEquipoNota = new Label();
             chkAbono = new CheckBox();
             btnGuardar = new Button();
             btnCancelar = new Button();
@@ -54,7 +57,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // lblTitulo
             //
             lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblTitulo.Location = new Point(12, 20);
+            lblTitulo.Location = new Point(12, 12);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(1010, 40);
             lblTitulo.TabIndex = 0;
@@ -65,7 +68,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblApellido.AutoSize = true;
             lblApellido.Font = new Font("Segoe UI", 11F);
-            lblApellido.Location = new Point(290, 83);
+            lblApellido.Location = new Point(290, 67);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(67, 20);
             lblApellido.TabIndex = 1;
@@ -74,7 +77,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtApellido
             //
             txtApellido.Font = new Font("Segoe UI", 11F);
-            txtApellido.Location = new Point(430, 80);
+            txtApellido.Location = new Point(430, 64);
             txtApellido.MaxLength = 50;
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(320, 27);
@@ -84,7 +87,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 11F);
-            lblNombre.Location = new Point(290, 123);
+            lblNombre.Location = new Point(290, 105);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(67, 20);
             lblNombre.TabIndex = 3;
@@ -93,7 +96,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtNombre
             //
             txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(430, 120);
+            txtNombre.Location = new Point(430, 102);
             txtNombre.MaxLength = 50;
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(320, 27);
@@ -103,7 +106,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblDni.AutoSize = true;
             lblDni.Font = new Font("Segoe UI", 11F);
-            lblDni.Location = new Point(290, 163);
+            lblDni.Location = new Point(290, 143);
             lblDni.Name = "lblDni";
             lblDni.Size = new Size(37, 20);
             lblDni.TabIndex = 5;
@@ -112,7 +115,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtDni
             //
             txtDni.Font = new Font("Segoe UI", 11F);
-            txtDni.Location = new Point(430, 160);
+            txtDni.Location = new Point(430, 140);
             txtDni.MaxLength = 15;
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(320, 27);
@@ -122,7 +125,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblDireccion.AutoSize = true;
             lblDireccion.Font = new Font("Segoe UI", 11F);
-            lblDireccion.Location = new Point(290, 203);
+            lblDireccion.Location = new Point(290, 181);
             lblDireccion.Name = "lblDireccion";
             lblDireccion.Size = new Size(75, 20);
             lblDireccion.TabIndex = 7;
@@ -131,7 +134,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtDireccion
             //
             txtDireccion.Font = new Font("Segoe UI", 11F);
-            txtDireccion.Location = new Point(430, 200);
+            txtDireccion.Location = new Point(430, 178);
             txtDireccion.MaxLength = 75;
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(320, 27);
@@ -141,7 +144,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblEdad.AutoSize = true;
             lblEdad.Font = new Font("Segoe UI", 11F);
-            lblEdad.Location = new Point(290, 243);
+            lblEdad.Location = new Point(290, 219);
             lblEdad.Name = "lblEdad";
             lblEdad.Size = new Size(45, 20);
             lblEdad.TabIndex = 9;
@@ -150,7 +153,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtEdad
             //
             txtEdad.Font = new Font("Segoe UI", 11F);
-            txtEdad.Location = new Point(430, 240);
+            txtEdad.Location = new Point(430, 216);
             txtEdad.MaxLength = 3;
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(80, 27);
@@ -161,7 +164,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 11F);
-            lblTelefono.Location = new Point(290, 283);
+            lblTelefono.Location = new Point(290, 257);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(70, 20);
             lblTelefono.TabIndex = 11;
@@ -170,7 +173,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // txtTelefono
             //
             txtTelefono.Font = new Font("Segoe UI", 11F);
-            txtTelefono.Location = new Point(430, 280);
+            txtTelefono.Location = new Point(430, 254);
             txtTelefono.MaxLength = 15;
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(320, 27);
@@ -180,7 +183,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblSexo.AutoSize = true;
             lblSexo.Font = new Font("Segoe UI", 11F);
-            lblSexo.Location = new Point(290, 323);
+            lblSexo.Location = new Point(290, 295);
             lblSexo.Name = "lblSexo";
             lblSexo.Size = new Size(43, 20);
             lblSexo.TabIndex = 13;
@@ -190,7 +193,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             rdbMasculino.AutoSize = true;
             rdbMasculino.Font = new Font("Segoe UI", 11F);
-            rdbMasculino.Location = new Point(430, 321);
+            rdbMasculino.Location = new Point(430, 293);
             rdbMasculino.Name = "rdbMasculino";
             rdbMasculino.Size = new Size(99, 24);
             rdbMasculino.TabIndex = 14;
@@ -202,7 +205,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             rdbFemenino.AutoSize = true;
             rdbFemenino.Font = new Font("Segoe UI", 11F);
-            rdbFemenino.Location = new Point(560, 321);
+            rdbFemenino.Location = new Point(560, 293);
             rdbFemenino.Name = "rdbFemenino";
             rdbFemenino.Size = new Size(95, 24);
             rdbFemenino.TabIndex = 15;
@@ -214,7 +217,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblCategoriaTitulo.AutoSize = true;
             lblCategoriaTitulo.Font = new Font("Segoe UI", 11F);
-            lblCategoriaTitulo.Location = new Point(290, 363);
+            lblCategoriaTitulo.Location = new Point(290, 333);
             lblCategoriaTitulo.Name = "lblCategoriaTitulo";
             lblCategoriaTitulo.Size = new Size(77, 20);
             lblCategoriaTitulo.TabIndex = 16;
@@ -224,30 +227,60 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             lblCategoria.AutoSize = true;
             lblCategoria.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblCategoria.Location = new Point(430, 363);
+            lblCategoria.Location = new Point(430, 333);
             lblCategoria.Name = "lblCategoria";
             lblCategoria.Size = new Size(19, 20);
             lblCategoria.TabIndex = 17;
             lblCategoria.Text = "—";
             //
+            // lblEquipoTitulo
+            //
+            lblEquipoTitulo.AutoSize = true;
+            lblEquipoTitulo.Font = new Font("Segoe UI", 11F);
+            lblEquipoTitulo.Location = new Point(290, 371);
+            lblEquipoTitulo.Name = "lblEquipoTitulo";
+            lblEquipoTitulo.Size = new Size(58, 20);
+            lblEquipoTitulo.TabIndex = 18;
+            lblEquipoTitulo.Text = "Equipo:";
+            //
+            // cmbEquipo
+            //
+            cmbEquipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEquipo.Font = new Font("Segoe UI", 11F);
+            cmbEquipo.Location = new Point(430, 368);
+            cmbEquipo.Name = "cmbEquipo";
+            cmbEquipo.Size = new Size(320, 28);
+            cmbEquipo.TabIndex = 19;
+            cmbEquipo.SelectionChangeCommitted += cmbEquipo_SelectionChangeCommitted;
+            //
+            // lblEquipoNota
+            //
+            lblEquipoNota.AutoSize = true;
+            lblEquipoNota.Font = new Font("Segoe UI", 10F, FontStyle.Italic);
+            lblEquipoNota.ForeColor = SystemColors.GrayText;
+            lblEquipoNota.Location = new Point(760, 372);
+            lblEquipoNota.Name = "lblEquipoNota";
+            lblEquipoNota.Size = new Size(0, 19);
+            lblEquipoNota.TabIndex = 20;
+            //
             // chkAbono
             //
             chkAbono.AutoSize = true;
             chkAbono.Font = new Font("Segoe UI", 11F);
-            chkAbono.Location = new Point(430, 401);
+            chkAbono.Location = new Point(430, 409);
             chkAbono.Name = "chkAbono";
             chkAbono.Size = new Size(163, 24);
-            chkAbono.TabIndex = 18;
+            chkAbono.TabIndex = 21;
             chkAbono.Text = "Abonó la inscripción";
             chkAbono.UseVisualStyleBackColor = true;
             //
             // btnGuardar
             //
             btnGuardar.Font = new Font("Segoe UI", 11F);
-            btnGuardar.Location = new Point(430, 450);
+            btnGuardar.Location = new Point(430, 455);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(150, 40);
-            btnGuardar.TabIndex = 19;
+            btnGuardar.TabIndex = 22;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
@@ -256,10 +289,10 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.Font = new Font("Segoe UI", 11F);
-            btnCancelar.Location = new Point(600, 450);
+            btnCancelar.Location = new Point(600, 455);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(150, 40);
-            btnCancelar.TabIndex = 20;
+            btnCancelar.TabIndex = 23;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             //
@@ -273,6 +306,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(chkAbono);
+            Controls.Add(lblEquipoNota);
+            Controls.Add(cmbEquipo);
+            Controls.Add(lblEquipoTitulo);
             Controls.Add(lblCategoria);
             Controls.Add(lblCategoriaTitulo);
             Controls.Add(rdbFemenino);
@@ -322,6 +358,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
         private RadioButton rdbFemenino;
         private Label lblCategoriaTitulo;
         private Label lblCategoria;
+        private Label lblEquipoTitulo;
+        private ComboBox cmbEquipo;
+        private Label lblEquipoNota;
         private CheckBox chkAbono;
         private Button btnGuardar;
         private Button btnCancelar;

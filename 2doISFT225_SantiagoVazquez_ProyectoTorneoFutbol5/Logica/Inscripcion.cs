@@ -13,6 +13,11 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Logica
 
         public Categoria Categoria { get; set; }
 
+        // null = todavía sin equipo (se puede asignar después).
+        public Equipo? Equipo { get; set; }
+
+        public bool EsCapitan => Equipo != null && Equipo.IdCapitan == Participante.Id;
+
         public Inscripcion(Participante participante, Categoria categoria)
         {
             Participante = participante;

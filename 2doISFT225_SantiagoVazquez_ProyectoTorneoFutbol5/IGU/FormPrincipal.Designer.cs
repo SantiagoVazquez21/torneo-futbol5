@@ -31,6 +31,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             lblTitulo = new Label();
             btnAgregarJugador = new Button();
             btnModificarJugador = new Button();
+            btnCrearEquipo = new Button();
             btnSalir = new Button();
             SuspendLayout();
             //
@@ -66,13 +67,24 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             btnModificarJugador.UseVisualStyleBackColor = true;
             btnModificarJugador.Click += btnModificarJugador_Click;
             //
+            // btnCrearEquipo
+            //
+            btnCrearEquipo.Font = new Font("Segoe UI", 12F);
+            btnCrearEquipo.Location = new Point(110, 275);
+            btnCrearEquipo.Name = "btnCrearEquipo";
+            btnCrearEquipo.Size = new Size(300, 60);
+            btnCrearEquipo.TabIndex = 3;
+            btnCrearEquipo.Text = "Crear equipo";
+            btnCrearEquipo.UseVisualStyleBackColor = true;
+            btnCrearEquipo.Click += btnCrearEquipo_Click;
+            //
             // btnSalir
             //
             btnSalir.Font = new Font("Segoe UI", 12F);
-            btnSalir.Location = new Point(110, 275);
+            btnSalir.Location = new Point(110, 355);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(300, 60);
-            btnSalir.TabIndex = 3;
+            btnSalir.TabIndex = 4;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
@@ -81,8 +93,9 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             //
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(520, 400);
+            ClientSize = new Size(520, 440);
             Controls.Add(btnSalir);
+            Controls.Add(btnCrearEquipo);
             Controls.Add(btnModificarJugador);
             Controls.Add(btnAgregarJugador);
             Controls.Add(lblTitulo);
@@ -99,6 +112,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
         private Label lblTitulo;
         private Button btnAgregarJugador;
         private Button btnModificarJugador;
+        private Button btnCrearEquipo;
         private Button btnSalir;
     }
 }

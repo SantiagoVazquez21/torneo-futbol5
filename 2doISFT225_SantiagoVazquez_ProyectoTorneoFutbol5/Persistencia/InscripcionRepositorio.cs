@@ -3,9 +3,9 @@ using _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Logica;
 
 namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
 {
-    // Cada inscripción toca dos tablas (participantes + inscripciones), por eso
-    // Insertar/Actualizar/Eliminar usan una transacción: o se guardan las dos
-    // cosas o ninguna, nunca queda un participante sin inscripción.
+    // Cada inscripción toca varias tablas (participantes + inscripciones, y al
+    // eliminar a un capitán también equipos), por eso Insertar/Actualizar/Eliminar
+    // usan una transacción: o se guarda todo o nada.
     public class InscripcionRepositorio
     {
         public List<Inscripcion> ObtenerTodas()
@@ -20,10 +20,13 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
                 "       p.id_participante, p.apellido_part, p.nombre_part, p.dni, " +
                 "       p.direccion, p.edad, p.telefono, p.sexo, " +
                 "       c.id_categoria, c.nombre_categoria, c.edad_min, c.edad_max, " +
-                "       c.sexo AS sexo_categoria " +
+                "       c.sexo AS sexo_categoria, " +
+                "       e.id_equipo, e.nombre_equipo, e.id_categoria AS categoria_equipo, e.id_capitan " +
                 "FROM inscripciones i " +
                 "JOIN participantes p ON p.id_participante = i.participante " +
                 "JOIN categorias c ON c.id_categoria = i.categoria " +
+                // LEFT JOIN: también trae a los jugadores que todavía no tienen equipo.
+                "LEFT JOIN equipos e ON e.id_equipo = i.id_equipo " +
                 "ORDER BY i.num_inscripcion;";
 
             using MySqlCommand comando = new MySqlCommand(sql, conexion);
@@ -58,6 +61,15 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
                     Fecha = lector.GetDateTime("fecha_insc"),
                     Abono = !lector.IsDBNull(lector.GetOrdinal("abono_inscrip")) &&
                             lector.GetBoolean("abono_inscrip"),
+                    Equipo = lector.IsDBNull(lector.GetOrdinal("id_equipo"))
+                        ? null
+                        : new Equipo
+                        {
+                            Id = lector.GetInt32("id_equipo"),
+                            Nombre = lector.GetString("nombre_equipo"),
+                            IdCategoria = lector.GetInt32("categoria_equipo"),
+                            IdCapitan = lector.GetInt32("id_capitan"),
+                        },
                 });
             }
 
@@ -83,8 +95,8 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
             }
 
             const string sqlInscripcion =
-                "INSERT INTO inscripciones (fecha_insc, abono_inscrip, categoria, participante) " +
-                "VALUES (@fecha, @abono, @categoria, @participante); " +
+                "INSERT INTO inscripciones (fecha_insc, abono_inscrip, categoria, participante, id_equipo) " +
+                "VALUES (@fecha, @abono, @categoria, @participante, @equipo); " +
                 "SELECT LAST_INSERT_ID();";
 
             using (MySqlCommand comando = new MySqlCommand(sqlInscripcion, conexion, transaccion))
@@ -93,6 +105,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
                 comando.Parameters.AddWithValue("@abono", inscripcion.Abono);
                 comando.Parameters.AddWithValue("@categoria", inscripcion.Categoria.Id);
                 comando.Parameters.AddWithValue("@participante", inscripcion.Participante.Id);
+                comando.Parameters.AddWithValue("@equipo", (object?)inscripcion.Equipo?.Id ?? DBNull.Value);
                 inscripcion.Numero = Convert.ToInt32(comando.ExecuteScalar());
             }
 
@@ -122,13 +135,15 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
 
             // La fecha de inscripción no se toca: es la del día en que se anotó.
             const string sqlInscripcion =
-                "UPDATE inscripciones SET abono_inscrip = @abono, categoria = @categoria " +
+                "UPDATE inscripciones SET abono_inscrip = @abono, categoria = @categoria, " +
+                "id_equipo = @equipo " +
                 "WHERE num_inscripcion = @numero;";
 
             using (MySqlCommand comando = new MySqlCommand(sqlInscripcion, conexion, transaccion))
             {
                 comando.Parameters.AddWithValue("@abono", inscripcion.Abono);
                 comando.Parameters.AddWithValue("@categoria", inscripcion.Categoria.Id);
+                comando.Parameters.AddWithValue("@equipo", (object?)inscripcion.Equipo?.Id ?? DBNull.Value);
                 comando.Parameters.AddWithValue("@numero", inscripcion.Numero);
                 comando.ExecuteNonQuery();
             }
@@ -142,7 +157,20 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.Persistencia
             conexion.Open();
             using MySqlTransaction transaccion = conexion.BeginTransaction();
 
-            // Primero la inscripción: la FK no deja borrar un participante
+            // Si es capitán, se disuelve su equipo: los demás jugadores quedan sin
+            // equipo y se borra el equipo (si no, la FK no deja borrar al capitán).
+            const string sqlDisolverEquipo =
+                "UPDATE inscripciones SET id_equipo = NULL " +
+                "WHERE id_equipo IN (SELECT id_equipo FROM equipos WHERE id_capitan = @id); " +
+                "DELETE FROM equipos WHERE id_capitan = @id;";
+
+            using (MySqlCommand comando = new MySqlCommand(sqlDisolverEquipo, conexion, transaccion))
+            {
+                comando.Parameters.AddWithValue("@id", inscripcion.Participante.Id);
+                comando.ExecuteNonQuery();
+            }
+
+            // Después la inscripción: la FK no deja borrar un participante
             // que todavía tiene una inscripción apuntándole.
             using (MySqlCommand comando = new MySqlCommand(
                 "DELETE FROM inscripciones WHERE num_inscripcion = @numero;", conexion, transaccion))

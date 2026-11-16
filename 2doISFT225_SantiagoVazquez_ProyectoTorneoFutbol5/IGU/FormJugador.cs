@@ -9,8 +9,14 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
     {
         private readonly Controladora controladora = new Controladora();
 
+        private const string SinEquipo = "(Sin equipo)";
+
         // null = modo agregar; con valor = modo modificar esa inscripción.
         private readonly Inscripcion? inscripcionAModificar;
+
+        // Último equipo elegido por el usuario: se mantiene aunque el combo se
+        // recargue al cambiar la edad o el sexo. null = sin equipo.
+        private int? equipoElegidoId;
 
         // Modo agregar: campos vacíos.
         public FormJugador()
@@ -22,6 +28,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
         public FormJugador(Inscripcion inscripcion) : this()
         {
             inscripcionAModificar = inscripcion;
+            equipoElegidoId = inscripcion.Equipo?.Id;
 
             Text = "Modificar jugador";
             lblTitulo.Text = "Modificar jugador";
@@ -33,6 +40,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             try
             {
                 controladora.TraerCategorias();
+                controladora.TraerEquipos();
             }
             catch (PersistenciaException ex)
             {
@@ -85,6 +93,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             {
                 lblCategoria.Text = "—";
                 lblCategoria.ForeColor = SystemColors.ControlText;
+                CargarEquipos(null);
                 return;
             }
 
@@ -110,6 +119,59 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
                 lblCategoria.Text = categoria.Nombre;
                 lblCategoria.ForeColor = Color.DarkGreen;
             }
+
+            CargarEquipos(categoria);
+        }
+
+        // Llena el combo con "(Sin equipo)" y los equipos que puede elegir según la categoría.
+        private void CargarEquipos(Categoria? categoria)
+        {
+            List<object> opciones = new List<object> { SinEquipo };
+            Equipo? equipoActual = inscripcionAModificar?.Equipo;
+
+            // El capitán no puede dejar su equipo: se muestra solo el suyo, bloqueado.
+            if (inscripcionAModificar != null && inscripcionAModificar.EsCapitan)
+            {
+                cmbEquipo.DataSource = new List<object> { equipoActual! };
+                cmbEquipo.Enabled = false;
+                lblEquipoNota.Text = "Es el capitán";
+                return;
+            }
+
+            try
+            {
+                if (categoria != null)
+                {
+                    opciones.AddRange(controladora.EquiposDisponibles(categoria, inscripcionAModificar));
+                }
+            }
+            catch (PersistenciaException)
+            {
+                return;
+            }
+
+            // Su equipo actual siempre aparece: si cambió de categoría, al guardar
+            // la Controladora avisa en vez de sacarlo del equipo sin decir nada.
+            if (equipoActual != null && !opciones.OfType<Equipo>().Any(e => e.Id == equipoActual.Id))
+            {
+                opciones.Add(equipoActual);
+            }
+
+            cmbEquipo.DataSource = opciones;
+            cmbEquipo.SelectedItem = opciones.OfType<Equipo>().FirstOrDefault(e => e.Id == equipoElegidoId)
+                                     ?? (object)SinEquipo;
+        }
+
+        // Solo se dispara cuando el usuario elige en el combo, no cuando se recarga por código.
+        private void cmbEquipo_SelectionChangeCommitted(object? sender, EventArgs e)
+        {
+            equipoElegidoId = (cmbEquipo.SelectedItem as Equipo)?.Id;
+        }
+
+        // "(Sin equipo)" es un texto, no un Equipo: en ese caso devuelve null.
+        private Equipo? EquipoElegido()
+        {
+            return cmbEquipo.SelectedItem as Equipo;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -120,7 +182,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
                 {
                     Inscripcion nueva = controladora.AgregarJugador(
                         txtApellido.Text, txtNombre.Text, txtDni.Text, txtDireccion.Text,
-                        txtEdad.Text, txtTelefono.Text, SexoElegido(), chkAbono.Checked);
+                        txtEdad.Text, txtTelefono.Text, SexoElegido(), chkAbono.Checked, EquipoElegido());
 
                     MessageBox.Show($"Jugador agregado en la categoría {nueva.Categoria.Nombre}.");
                 }
@@ -128,7 +190,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
                 {
                     controladora.ModificarJugador(inscripcionAModificar,
                         txtApellido.Text, txtNombre.Text, txtDni.Text, txtDireccion.Text,
-                        txtEdad.Text, txtTelefono.Text, SexoElegido(), chkAbono.Checked);
+                        txtEdad.Text, txtTelefono.Text, SexoElegido(), chkAbono.Checked, EquipoElegido());
 
                     MessageBox.Show("Jugador modificado correctamente.");
                 }

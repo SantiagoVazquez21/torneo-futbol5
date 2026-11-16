@@ -21,6 +21,12 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             formListado.ShowDialog(this);
         }
 
+        private void btnCrearEquipo_Click(object sender, EventArgs e)
+        {
+            using FormEquipo formEquipo = new FormEquipo();
+            formEquipo.ShowDialog(this);
+        }
+
         // Al cerrar el formulario principal termina la aplicación.
         private void btnSalir_Click(object sender, EventArgs e)
         {
