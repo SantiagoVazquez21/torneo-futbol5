@@ -55,10 +55,5 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
 
             DialogResult = DialogResult.OK;
         }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

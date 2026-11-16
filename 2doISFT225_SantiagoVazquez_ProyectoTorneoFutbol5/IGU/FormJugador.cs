@@ -210,10 +210,5 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             // formulario abierto con ShowDialog, asignarlo también lo cierra.
             DialogResult = DialogResult.OK;
         }
-
-        private void txtApellido_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -82,7 +82,6 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(320, 27);
             txtApellido.TabIndex = 2;
-            txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // lblNombre
             // 

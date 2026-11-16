@@ -107,7 +107,6 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5.IGU
             btnCancelar.TabIndex = 6;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // FormEquipo
             // 
