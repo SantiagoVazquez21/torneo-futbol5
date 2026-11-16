@@ -14,6 +14,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Le indica a Visual Studio que son formularios, para que los abra en el diseñador. -->
+    <Compile Update="IGU\FormPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="IGU\FormJugador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="IGU\FormListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="IGU\FormEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="IGU\GrillaJugadores.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Se copia junto al .exe para que la app lo encuentre al ejecutarse. -->
     <None Update="conexion.local.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
