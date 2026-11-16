@@ -19,7 +19,7 @@ namespace _2doISFT225_SantiagoVazquez_ProyectoTorneoFutbol5
                 return;
             }
 
-            Application.Run(new Form1());
+            Application.Run(new FormPrincipal());
         }
     }
 }
